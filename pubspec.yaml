@@ -1,4 +1,4 @@
-﻿name: neyesem_mobile
+name: neyesem_mobile
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -33,7 +33,7 @@ dependencies:
     sdk: flutter
   equatable: ^2.0.7 
   
-  # Tam olarak flutter ile alt alta olmalÄ±, baÅŸÄ±nda 2 boÅŸluk olmalÄ±
+  # Tam olarak flutter ile alt alta olmalı, başında 2 boşluk olmalı
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
