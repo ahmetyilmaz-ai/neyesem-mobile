@@ -4,6 +4,7 @@ import '../../features/home/screens/home_screen.dart';
 import '../../features/profile/screens/profile_screen.dart';
 import '../../features/discovery/screens/discovery_screen.dart';
 import '../../features/comparison/screens/comparison_screen.dart';
+import '../../features/discount/screens/suspicious_discounts_screen.dart';
 import '../../features/profile/bloc/profile_bloc.dart';
 import '../../features/profile/bloc/profile_event.dart';
 import '../constants/app_colors.dart';
@@ -22,6 +23,7 @@ class _MainLayoutState extends State<MainLayout> {
     HomeScreen(),
     DiscoveryScreen(),
     ComparisonScreen(),
+    SuspiciousDiscountsScreen(),
     ProfileScreen(),
   ];
 
@@ -55,6 +57,10 @@ class _MainLayoutState extends State<MainLayout> {
             BottomNavigationBarItem(
               icon: Icon(Icons.compare_arrows_rounded),
               label: 'Karşılaştır',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.warning_amber_rounded),
+              label: 'Sahte İndirim',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person_rounded),
