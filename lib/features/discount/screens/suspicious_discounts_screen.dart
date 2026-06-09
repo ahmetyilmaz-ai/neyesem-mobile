@@ -366,7 +366,7 @@ class _SuspiciousDiscountsScreenState extends State<SuspiciousDiscountsScreen> {
                                 reason,
                                 style: TextStyle(
                                   fontSize: 11,
-                                  color: Colors.red.shade950,
+                                  color: Colors.red.shade900,
                                   height: 1.3,
                                 ),
                               ),
