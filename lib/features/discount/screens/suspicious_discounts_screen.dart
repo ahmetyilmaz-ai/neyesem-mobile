@@ -176,7 +176,8 @@ class _SuspiciousDiscountsScreenState extends State<SuspiciousDiscountsScreen> {
     final originalPrice = _toDouble(item['original_price']);
     final discountRate = _toDouble(item['discount_rate']);
     final score = _toDouble(item['suspicion_score']) ?? 0.0;
-    final medianPrice = _toDouble(item['category_median_price']);
+    final cheaperPrice = _toDouble(item['cheaper_price']);
+    final cheaperPlatform = item['cheaper_platform']?.toString();
     final reasons = (item['reasons'] as List?)?.map((e) => e.toString()).toList() ?? [];
 
     Color scoreColor = Colors.orange;
@@ -290,20 +291,20 @@ class _SuspiciousDiscountsScreenState extends State<SuspiciousDiscountsScreen> {
                         ],
                       ),
                     const SizedBox(width: 16),
-                    if (medianPrice != null)
+                    if (cheaperPrice != null)
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Kategori Medyanı',
-                            style: TextStyle(fontSize: 10, color: Colors.grey),
+                          Text(
+                            '${_platformLabel(cheaperPlatform ?? '')}\'de',
+                            style: const TextStyle(fontSize: 10, color: Colors.grey),
                           ),
                           Text(
-                            '${medianPrice.toStringAsFixed(0)} TL',
-                            style: TextStyle(
+                            '${cheaperPrice.toStringAsFixed(0)} TL',
+                            style: const TextStyle(
                               fontSize: 15,
-                              color: Colors.grey.shade700,
-                              fontWeight: FontWeight.w600,
+                              color: AppColors.healthGreen,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ],

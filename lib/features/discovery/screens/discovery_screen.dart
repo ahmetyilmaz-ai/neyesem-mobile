@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/app_colors.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import '../../../core/services/ai_api_service.dart';
 
 class DiscoveryScreen extends StatefulWidget {
@@ -94,6 +96,7 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
         'platform_count': urun['platform_sayisi'],
         'score': _toDouble(ai['skor']),
         'reason': ai['neden']?.toString(),
+        'url': urun['urun_url']?.toString(),
       });
     }
     return out;
@@ -325,6 +328,19 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                       color: Colors.black45,
                       fontStyle: FontStyle.italic)),
             ],
+            if (item['url'] != null)
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton.icon(
+                  onPressed: () => _openUrl(item['url'].toString()),
+                  icon: const Icon(Icons.open_in_new,
+                      size: 16, color: AppColors.primaryOrange),
+                  label: const Text('Platformda Aç',
+                      style: TextStyle(
+                          color: AppColors.primaryOrange,
+                          fontWeight: FontWeight.bold)),
+                ),
+              ),
           ],
         ),
       ),
@@ -418,6 +434,14 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
         return 'Yemeksepeti';
       default:
         return platform;
+    }
+  }
+
+  Future<void> _openUrl(String? url) async {
+    if (url == null || url.isEmpty) return;
+    final uri = Uri.tryParse(url);
+    if (uri != null) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
     }
   }
 
