@@ -3,7 +3,11 @@
 import 'package:http/http.dart' as http;
 
 class AiApiService {
-  static const String baseUrl = 'http://127.0.0.1:8000';
+  // Backend (Express) üzerinden: mobil -> backend:3000 -> AI:8000.
+  // Backend aynı uçları (/homepage, /recommend, /compare, /suspicious-discounts)
+  // AI'a iletir; ayrıca auth/profil sağlar. (Doğrudan AI için: 127.0.0.1:8000)
+  // Android emülatör: 10.0.2.2:3000
+  static const String baseUrl = 'http://127.0.0.1:3000';
 
   Future<Map<String, dynamic>> getHomepageRecommendations({
     int limit = 8,
