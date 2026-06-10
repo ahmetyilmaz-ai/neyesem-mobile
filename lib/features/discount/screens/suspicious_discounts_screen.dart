@@ -176,6 +176,7 @@ class _SuspiciousDiscountsScreenState extends State<SuspiciousDiscountsScreen> {
     final originalPrice = _toDouble(item['original_price']);
     final discountRate = _toDouble(item['discount_rate']);
     final score = _toDouble(item['suspicion_score']) ?? 0.0;
+    final marketMedian = _toDouble(item['market_median']);
     final cheaperPrice = _toDouble(item['cheaper_price']);
     final cheaperPlatform = item['cheaper_platform']?.toString();
     final reasons = (item['reasons'] as List?)?.map((e) => e.toString()).toList() ?? [];
@@ -291,7 +292,25 @@ class _SuspiciousDiscountsScreenState extends State<SuspiciousDiscountsScreen> {
                         ],
                       ),
                     const SizedBox(width: 16),
-                    if (cheaperPrice != null)
+                    if (marketMedian != null)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Piyasa (medyan)',
+                            style: TextStyle(fontSize: 10, color: Colors.grey),
+                          ),
+                          Text(
+                            '~${marketMedian.toStringAsFixed(0)} TL',
+                            style: const TextStyle(
+                              fontSize: 15,
+                              color: AppColors.healthGreen,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      )
+                    else if (cheaperPrice != null)
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
