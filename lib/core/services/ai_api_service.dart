@@ -6,8 +6,18 @@ class AiApiService {
   // Backend (Express) üzerinden: mobil -> backend:3000 -> AI:8000.
   // Backend aynı uçları (/homepage, /recommend, /compare, /suspicious-discounts)
   // AI'a iletir; ayrıca auth/profil sağlar. (Doğrudan AI için: 127.0.0.1:8000)
-  // Android emülatör: 10.0.2.2:3000
-  static const String baseUrl = 'http://127.0.0.1:3000';
+  //
+  // baseUrl, sayfanın AÇILDIĞI host'tan türetilir; böylece:
+  //  - PC'de Chrome ile açınca   -> localhost:3000
+  //  - Telefonda LAN üzerinden    -> http://<pc-ip>:3000  (sabit IP yazmaya gerek yok)
+  // Backend telefonla aynı wifi'de ve 3000'i açık olmalı (cors zaten açık).
+  static String get baseUrl {
+    final host = Uri.base.host;
+    if (host.isEmpty || host == 'localhost' || host == '127.0.0.1') {
+      return 'http://127.0.0.1:3000';
+    }
+    return 'http://$host:3000';
+  }
 
   Future<Map<String, dynamic>> getHomepageRecommendations({
     int limit = 8,
