@@ -4,6 +4,7 @@ import '../../../core/constants/app_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/services/ai_api_service.dart';
+import '../../comparison/screens/product_comparison_screen.dart';
 
 class DiscoveryScreen extends StatefulWidget {
   const DiscoveryScreen({super.key});
@@ -256,7 +257,10 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
       margin: const EdgeInsets.only(bottom: 12),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       elevation: 1,
-      child: Padding(
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: () => _openComparison(item['title'].toString()),
+        child: Padding(
         padding: const EdgeInsets.all(14),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -273,6 +277,9 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                         color: AppColors.primaryOrange,
                         fontWeight: FontWeight.bold,
                         fontSize: 16)),
+                const SizedBox(width: 4),
+                const Icon(Icons.compare_arrows,
+                    size: 18, color: AppColors.primaryOrange),
               ],
             ),
             const SizedBox(height: 4),
@@ -343,6 +350,15 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
               ),
           ],
         ),
+      ),
+      ),
+    );
+  }
+
+  void _openComparison(String productName) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => ProductComparisonScreen(productName: productName),
       ),
     );
   }
